@@ -14,6 +14,7 @@ let Todo = () =>{
     let shum =() =>{
         if(!inputdata){
             
+            
             toast.error('🙏 Please fill the Input Field', {
                 position: "top-right",
                 autoClose: 5000,
@@ -25,7 +26,10 @@ let Todo = () =>{
                 });
         }
         else{
+            
             setItems([...items,inputdata]);
+            setInputdata("")
+
             setInputdata("");
             toast.success('👏 The data Added was successfull', {
                 position: "top-right",
@@ -40,6 +44,29 @@ let Todo = () =>{
         }
 
     }
+    let mone = (ind) =>{
+        toast.error('👍The data was successfully deleted', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            });
+        let b =  items.filter((value,index)=>{
+
+            if(index!=ind){
+                return value;
+
+            }
+            
+        })
+        setItems([...b])
+        
+    }
+
+   
     
     
     
@@ -60,13 +87,13 @@ let Todo = () =>{
 
             </div>
             <button type="button" className="btn btn-primary mr"  onClick={shum} value={inputdata} >Add <i className='fa fa-plus'></i></button>
-            {items.map((value)=>{
+            {items.map((value,index)=>{
                 return(
                     <div className='items'>
                 <p className='left  col-white'>{value}</p>
                 <div className='flo-right'>
                 <i className='far fa-edit col-green mar-lft'></i>
-                <i className='far fa-trash-alt col-red'></i>
+                <i className='far fa-trash-alt col-red' onClick={()=>mone(index)}></i>
                 </div>
             </div>
 
